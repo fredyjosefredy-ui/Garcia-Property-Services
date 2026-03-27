@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garcia Property Services</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    :root {
+      --dark: #111111;
+      --dark-2: #1c1c1c;
+      --yellow: #d7f15c;
+      --yellow-dark: #c7e24d;
+      --light: #ffffff;
+      --muted: #6b6b6b;
+      --section: #f8f8f8;
+      --border: #e8e8e8;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(17,17,17,0.95);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      color: white;
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .logo span {
+      color: var(--yellow);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    nav a:hover {
+      color: var(--yellow);
+    }
+
+    .nav-btn {
+      padding: 12px 18px;
+      background: var(--yellow);
+      color: #111;
+      border-radius: 10px;
+      font-weight: 800;
+    }
+
+    .nav-btn:hover {
+      background: var(--yellow-dark);
+      color: #111;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.6s ease-in-out;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.58));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      padding: 70px 0;
+      max-width: 760px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(215,241,92,0.18);
+      color: var(--yellow);
+      border: 1px solid rgba(215,241,92,0.32);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.4rem);
+      line-height: 1.05;
+      margin-bottom: 22px;
+      font-weight: 800;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.92);
+      max-width: 700px;
+      margin-bottom: 34px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: #111;
+    }
+
+    .btn-primary:hover {
+      background: var(--yellow-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: #111;
+    }
+
+    /* SECTION GENERAL */
+    section {
+      padding: 88px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #fff4d3;
+      color: #916300;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 16px;
+      color: #1a1a1a;
+      line-height: 1.1;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 1.05rem;
+      margin-bottom: 34px;
+    }
+
+    /* TRUST */
+    #trust {
+      background: linear-gradient(180deg, #f7f7f7 0%, #ffffff 100%);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .trust-main {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .trust-main h3 {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+      color: #111;
+    }
+
+    .trust-main p {
+      color: #565656;
+      margin-bottom: 16px;
+      font-size: 1.02rem;
+    }
+
+    .trust-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .trust-item {
+      background: linear-gradient(135deg, #111 0%, #202020 100%);
+      color: white;
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .trust-item h4 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+      color: var(--yellow);
+    }
+
+    .trust-item p {
+      color: rgba(255,255,255,0.86);
+    }
+
+    /* ABOUT */
+    #about {
+      background: white;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 38px;
+      align-items: stretch;
+    }
+
+    .about-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-card p {
+      color: #505050;
+      margin-bottom: 16px;
+      font-size: 1.02rem;
+    }
+
+    .about-points {
+      display: grid;
+      gap: 16px;
+    }
+
+    .point {
+      background: linear-gradient(135deg, #111 0%, #202020 100%);
+      color: white;
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .point h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: var(--yellow);
+    }
+
+    .point p {
+      color: rgba(255,255,255,0.86);
+      font-size: 0.97rem;
+    }
+
+    /* SERVICES */
+    #services {
+      background: linear-gradient(180deg, #f7f7f7 0%, #f2f2f2 100%);
+    }
+
+    .services-header {
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--yellow);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .service-card p {
+      color: #5f5f5f;
+    }
+
+    /* WHY US */
+    #why-us {
+      background: white;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+    }
+
+    .why-main {
+      background: linear-gradient(135deg, #141414 0%, #262626 100%);
+      border-radius: 24px;
+      padding: 36px;
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .why-main h3 {
+      color: var(--yellow);
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .why-main p {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.03rem;
+      margin-bottom: 16px;
+    }
+
+    .why-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .why-item {
+      background: #fffef4;
+      border: 1px solid #f0e7b5;
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .why-item h4 {
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+      color: #111;
+    }
+
+    .why-item p {
+      color: #666;
+    }
+
+    /* REVIEWS */
+    #reviews {
+      background: #f8f8f8;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 26px;
+    }
+
+    .review-card {
+      background: white;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: 0.25s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .review-card.featured {
+      background: linear-gradient(135deg, #141414 0%, #2a2a2a 100%);
+      border: none;
+    }
+
+    .review-card p {
+      color: #5d5d5d;
+      margin-bottom: 18px;
+      font-size: 1rem;
+    }
+
+    .review-card h4 {
+      color: #111;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .review-card span {
+      color: #7a7a7a;
+      font-size: 0.95rem;
+    }
+
+    .review-card.featured p,
+    .review-card.featured h4,
+    .review-card.featured span {
+      color: white;
+    }
+
+    /* GALLERY */
+    #gallery {
+      background: #f8f8f8;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 18px;
+      background: white;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+    }
+
+    /* PROCESS */
+    #process {
+      background: white;
+    }
+
+    .process-wrap {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .process-steps {
+      display: grid;
+      gap: 18px;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .step-number {
+      min-width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .step h4 {
+      margin-bottom: 6px;
+      font-size: 1.08rem;
+      color: #111;
+    }
+
+    .step p {
+      color: #666;
+    }
+
+    .process-photo {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 520px;
+      background: #ddd;
+    }
+
+    .process-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: linear-gradient(180deg, #111 0%, #1b1b1b 100%);
+      color: white;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .contact-info {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 30px;
+    }
+
+    .contact-info h3 {
+      color: var(--yellow);
+      margin-bottom: 16px;
+      font-size: 1.4rem;
+    }
+
+    .contact-info p {
+      color: rgba(255,255,255,0.84);
+      margin-bottom: 14px;
+    }
+
+    .contact-form {
+      background: white;
+      color: #111;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #222;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #d8d8d8;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    .field textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: var(--yellow);
+      color: #111;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: var(--yellow-dark);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0d0d0d;
+      color: rgba(255,255,255,0.72);
+      text-align: center;
+      padding: 24px 15px;
+      font-size: 0.95rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .services-grid,
+      .gallery-grid,
+      .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid,
+      .why-grid,
+      .process-wrap,
+      .contact-grid,
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .hero {
+        min-height: 78vh;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .services-grid,
+      .gallery-grid,
+      .form-row,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-photo {
+        min-height: 340px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#top" class="logo">Garcia <span>Property Services</span></a>
+
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery">My Work</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="nav-btn" href="#contact">Get an Estimate</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="slideshow">
+      <div class="slide active" style="background-image:url('Image 72.jpeg');"></div>
+      <div class="slide" style="background-image:url('Image 69.jpeg');"></div>
+      <div class="slide" style="background-image:url('Image 21.jpeg');"></div>
+      <div class="slide" style="background-image:url('Image 58.jpeg');"></div>
+      <div class="slide" style="background-image:url('Image 31.jpeg');"></div>
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+      <span class="hero-badge">Reliable outdoor work with real results</span>
+      <h1>Property Services Done Right</h1>
+      <p>
+        Professional lawn care, mulch installs, cleanups, drainage work, seasonal work,
+        and real project photos from jobs completed with care. Backed by local reviews
+        and recognized as a Nextdoor Neighborhood Favorite 2025.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#gallery" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-secondary">Get an Estimate</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="trust">
+    <div class="container">
+      <span class="tag">Trusted locally</span>
+      <h2 class="section-title">Recognized by the community</h2>
+      <p class="section-text">
+        Garcia Property Services was recognized as a Nextdoor Neighborhood Favorite in 2025,
+        with recommendations from local homeowners who value reliable service, communication,
+        fair pricing, and real results.
+      </p>
+
+      <div class="trust-grid">
+        <div class="trust-main">
+          <h3>Nextdoor Neighborhood Favorite 2025</h3>
+          <p>
+            This recognition reflects the support of real homeowners who have trusted Garcia
+            Property Services for lawn care, cleanups, mulch installs, and property improvement work.
+          </p>
+          <p>
+            The goal stays the same: show up, communicate clearly, do the work right,
+            and leave the property looking noticeably better than before.
+          </p>
+        </div>
+
+        <div class="trust-list">
+          <div class="trust-item">
+            <h4>Local recommendations</h4>
+            <p>Real feedback from homeowners across Winchester and nearby neighborhoods.</p>
+          </div>
+
+          <div class="trust-item">
+            <h4>Reliable communication</h4>
+            <p>Clients consistently mention punctuality, professionalism, and follow-through.</p>
+          </div>
+
+          <div class="trust-item">
+            <h4>Real work, real results</h4>
+            <p>Before-and-after photos and repeat clients show the quality of the work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <span class="tag">About</span>
+      <h2 class="section-title">Built on hard work, trust, and real effort</h2>
+      <p class="section-text">
+        Garcia Property Services is focused on helping homeowners keep their properties clean,
+        sharp, and well maintained. From mowing and mulch to drainage, seasonal work, and cleanups,
+        the goal is simple: show up, do it right, and leave the place looking better than before.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <p>
+            This business is built around honest work and real results. Every project matters,
+            whether it is a simple mow, a mulch refresh, a cleanup, or a bigger transformation.
+          </p>
+          <p>
+            I care about the small details, communication, and making sure the final result feels
+            worth it for the homeowner. That is what keeps people coming back.
+          </p>
+          <p>
+            The photos on this site are real jobs and real progress. No fake stock portfolio.
+            Just actual work.
+          </p>
+        </div>
+
+        <div class="about-points">
+          <div class="point">
+            <h3>Reliable service</h3>
+            <p>Clear communication, dependable scheduling, and work done with consistency.</p>
+          </div>
+
+          <div class="point">
+            <h3>Real project experience</h3>
+            <p>Before-and-after results from mowing, cleanups, drainage, mulch, rock, and seasonal work.</p>
+          </div>
+
+          <div class="point">
+            <h3>Care for the finished look</h3>
+            <p>Not just getting it done — making it look clean, sharp, and professionally finished.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="services-header">
+        <span class="tag">Services</span>
+        <h2 class="section-title">What I offer</h2>
+        <p class="section-text">
+          Outdoor work that improves curb appeal, function, and overall upkeep.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Lawn Care</h3>
+          <p>Mowing, trimming, edging, and recurring yard maintenance to keep your property looking clean and sharp.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Mulch Installs</h3>
+          <p>Fresh mulch installs and bed refreshes that instantly upgrade the look of your landscape.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Cleanups</h3>
+          <p>Leaf removal, debris cleanup, overgrowth cleanup, and general property refresh work.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Drainage &amp; Rock Work</h3>
+          <p>Drainage solutions, river rock installs, and cleanup around problem areas to improve function and appearance.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Seasonal Services</h3>
+          <p>Snow removal, seasonal yard cleanups, and property maintenance throughout the year.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Landscape Touch-Ups</h3>
+          <p>Small improvements that make a big difference, including trimming, bed definition, and visual cleanup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-us">
+    <div class="container">
+      <span class="tag">Why us?</span>
+      <h2 class="section-title">Why homeowners choose Garcia Property Services</h2>
+      <p class="section-text">
+        Because people want more than somebody who just rushes through the job. They want someone
+        who actually cares how it looks when it is done.
+      </p>
+
+      <div class="why-grid">
+        <div class="why-main">
+          <h3>Heart behind the work</h3>
+          <p>
+            I take pride in helping people feel better about their home the moment they pull into the driveway.
+            A clean lawn, fresh mulch, a neat walkway, or a finished drainage project can completely change
+            how a property feels.
+          </p>
+          <p>
+            That is why I focus on effort, detail, and making sure the final result actually stands out.
+            I want every project to look like real care went into it — because it did.
+          </p>
+        </div>
+
+        <div class="why-list">
+          <div class="why-item">
+            <h4>Real before-and-after results</h4>
+            <p>You can actually see the work, not just read about it.</p>
+          </div>
+
+          <div class="why-item">
+            <h4>Personal and responsive</h4>
+            <p>Easy communication, clear expectations, and a more direct experience from start to finish.</p>
+          </div>
+
+          <div class="why-item">
+            <h4>Strong curb appeal mindset</h4>
+            <p>The goal is not just maintenance. It is making your property look noticeably better.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="container">
+      <span class="tag">Reviews</span>
+      <h2 class="section-title">What homeowners are saying</h2>
+      <p class="section-text">
+        Real recommendations from local homeowners who trusted Garcia Property Services and shared
+        their experience on Nextdoor.
+      </p>
+
+      <div class="reviews-grid">
+        <div class="review-card featured">
+          <p>
+            “Jose is amazing! My husband is a disabled veteran, we both work full time and have children,
+            one with special needs. I found Jose here on Nextdoor and he came out THE SAME DAY!
+            He was very thorough and even cleaned up the grass from the walk and driveway.
+            It’s clear he cares about his work and the people he helps. He’s never missed a mow since!”
+          </p>
+          <h4>Pam Cargo</h4>
+          <span>Carlisle Heights</span>
+        </div>
+
+        <div class="review-card">
+          <p>
+            “I couldn’t be happier with the work done by Jose. He was punctual, professional,
+            and took great care in every detail of my yard. From mowing and edging to cleanup,
+            everything was done with a level of precision and pride that really shows.”
+          </p>
+          <h4>Lesley Watterson</h4>
+          <span>Sovereign Village</span>
+        </div>
+
+        <div class="review-card">
+          <p>
+            “Jose has been taking care of my lawn for about 2 months and it looks amazing.
+            He's very communicative and timely, not to mention hard working and honest.”
+          </p>
+          <h4>Kristie Clark</h4>
+          <span>Greenbriar</span>
+        </div>
+
+        <div class="review-card">
+          <p>
+            “Jose was recommended to us by a friend and he has done a great job on our lawn.
+            He's been reliable and very professional.”
+          </p>
+          <h4>Joann Baltimore</h4>
+          <span>Carlisle Heights</span>
+        </div>
+
+        <div class="review-card">
+          <p>
+            “Jose and his team are professional, punctual, friendly, and communicative.
+            They’ve done work for me over the last year and I’m very impressed and satisfied
+            with their work. Fair pricing, great service.”
+          </p>
+          <h4>Steve L.</h4>
+          <span>Summit Point</span>
+        </div>
+
+        <div class="review-card">
+          <p>
+            “Our front beds were a mess; we needed overgrown bushes removed, wild ground cover pulled out,
+            and mulching. He was professional and responsive. We are very pleased with the work he did for us.”
+          </p>
+          <h4>Jane Thompson</h4>
+          <span>Senseny Glen</span>
+        </div>
+
+        <div class="review-card">
+          <p>
+            “I’ve been using Jose’s lawn service for a few weeks now, and I couldn’t be happier with the results.
+            Jose is incredibly reliable, professional, and clearly takes pride in his work.”
+          </p>
+          <h4>Jascelle Mayo</h4>
+          <span>Mill Race Estates</span>
+        </div>
+
+        <div class="review-card">
+          <p>
+            “Jose has been a great landscaper for our home in Inwood. He is prompt and always communicates,
+            reasonably priced, and always makes sure to share after pics. I would recommend his services to anyone!”
+          </p>
+          <h4>Jessica Caro</h4>
+          <span>Inwood</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <span class="tag">Gallery</span>
+      <h2 class="section-title">Project gallery</h2>
+      <p class="section-text">
+        Real project photos from jobs completed across mowing, mulch installs, drainage work,
+        cleanups, rock installs, and seasonal services.
+      </p>
+
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="container">
+      <span class="tag">Simple process</span>
+      <h2 class="section-title">How it works</h2>
+      <p class="section-text">
+        A straightforward process that keeps things easy and clear from start to finish.
+      </p>
+
+      <div class="process-wrap">
+        <div class="process-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div>
+              <h4>Reach out</h4>
+              <p>Send your name, number, and what you are looking to get done.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div>
+              <h4>Walkthrough or estimate</h4>
+              <p>I review the project, talk through the details, and give you a clear price.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div>
+              <h4>Job gets done right</h4>
+              <p>The work is completed with attention to detail, cleanup, and a professional finished look.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div>
+              <h4>Enjoy the result</h4>
+              <p>Your property looks cleaner, sharper, and better maintained.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="process-photo">
+          <img src="Image 15.jpeg" alt="Garcia Property Services project photo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <span class="tag">Contact</span>
+      <h2 class="section-title" style="color:white;">Get an estimate</h2>
+      <p class="section-text" style="color:rgba(255,255,255,0.78);">
+        Fill out the form below and I will get back to you about your project.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Let’s talk about your project</h3>
+          <p><strong>Phone:</strong> 571-258-8573</p>
+          <p><strong>Email:</strong> info.josegonzalez08@gmail.com</p>
+          <p>
+            Whether you need recurring lawn care, mulch, a cleanup, drainage work,
+            or a seasonal service, send over the details and I will reach out.
+          </p>
+        </div>
+
+        <form class="contact-form" action="mailto:info.josegonzalez08@gmail.com" method="post" enctype="text/plain">
+          <div class="form-row">
+            <div class="field">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" name="First Name" required>
+            </div>
+
+            <div class="field">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" name="Last Name" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="Phone Number" required>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="Email">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="project">What are you looking to get done?</label>
+            <textarea id="project" name="Project Description" placeholder="Tell me about the project..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Garcia Property Services © 2026 • Professional property maintenance with real before-and-after results.</p>
+  </footer>
+
+  <script>
+    /* HERO SLIDESHOW */
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
+
+    function showNextSlide() {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+
+    setInterval(showNextSlide, 10000);
+
+    /* GALLERY AUTO LOAD */
+    const galleryGrid = document.getElementById("galleryGrid");
+
+    for (let i = 4; i <= 73; i++) {
+      const item = document.createElement("div");
+      item.className = "gallery-item";
+
+      const img = document.createElement("img");
+      img.src = `Image ${i}.jpeg`;
+      img.alt = `Garcia Property Services project photo ${i}`;
+
+      img.onerror = function () {
+        item.remove();
+      };
+
+      item.appendChild(img);
+      galleryGrid.appendChild(item);
+    }
+  </script>
+
+</body>
+</html>
