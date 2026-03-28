@@ -529,6 +529,44 @@
       transform: scale(1.04);
     }
 
+    /* ADD THIS */
+    .gallery-slider {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .gallery-slider img {
+      width: 100%;
+      border-radius: 14px;
+    }
+
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      font-size: 26px;
+      padding: 12px 18px;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    .gallery-arrow.left {
+      left: 10px;
+    }
+
+    .gallery-arrow.right {
+      right: 10px;
+    }
+
+/* PROCESS */
+#process {
+  background: white;
+}
+
     /* PROCESS */
     #process {
       background: white;
@@ -1060,7 +1098,15 @@
         cleanups, rock installs, and seasonal services.
       </p>
 
-      <div class="gallery-grid" id="galleryGrid"></div>
+      <div class="gallery-slider">
+
+        <button class="gallery-arrow left" onclick="prevGallery()">❮</button>
+
+        <img id="galleryMain" src="Image 13.jpeg" alt="Project photo">
+
+        <button class="gallery-arrow right" onclick="nextGallery()">❯</button>
+
+      </div>
     </div>
   </section>
 
@@ -1186,24 +1232,28 @@
 
     setInterval(showNextSlide, 10000);
 
-    /* GALLERY AUTO LOAD */
-    const galleryGrid = document.getElementById("galleryGrid");
+    /* GALLERY SLIDER */
+      let galleryImages = [];
+      for (let i = 13; i <= 73; i++) {
+        galleryImages.push(`Image ${i}.jpeg`);
+      }
+      
+      let currentGallery = 0;
+      
+      function showGalleryImage() {
+        document.getElementById("galleryMain").src = galleryImages[currentGallery];
+      }
+      
+      function nextGallery() {
+        currentGallery = (currentGallery + 1) % galleryImages.length;
+        showGalleryImage();
+      }
+      
+      function prevGallery() {
+        currentGallery = (currentGallery - 1 + galleryImages.length) % galleryImages.length;
+        showGalleryImage();
+      }
 
-    for (let i = 13; i <= 73; i++) {
-      const item = document.createElement("div");
-      item.className = "gallery-item";
-
-      const img = document.createElement("img");
-      img.src = `Image ${i}.jpeg`;
-      img.alt = `Garcia Property Services project photo ${i}`;
-
-      img.onerror = function () {
-        item.remove();
-      };
-
-      item.appendChild(img);
-      galleryGrid.appendChild(item);
-    }
   </script>
 
 </body>
