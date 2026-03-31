@@ -774,6 +774,96 @@
         min-height: 340px;
       }
     }
+    /* LAWN PRICING */
+#lawn-pricing {
+  background: white;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 26px;
+}
+
+.pricing-card {
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: 0.25s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+}
+
+.pricing-image img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.pricing-content {
+  padding: 24px;
+}
+
+.pricing-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.pricing-desc {
+  color: #666;
+  margin-bottom: 18px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid #ececec;
+  font-size: 1rem;
+}
+
+.price-row strong {
+  font-size: 1.15rem;
+  color: #111;
+}
+
+.pricing-note {
+  margin-top: 28px;
+  background: #f8f8f8;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.pricing-note p {
+  color: #666;
+  max-width: 760px;
+}
+
+@media (max-width: 1024px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
   </style>
 </head>
 <body>
@@ -786,6 +876,7 @@
         <ul>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#lawn-pricing">Lawn Care</a></li>
           <li><a href="#gallery">My Work</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#reviews">Reviews</a></li>
@@ -822,6 +913,92 @@
       </div>
     </div>
   </section>
+  <section id="lawn-pricing">
+  <div class="container">
+    <span class="tag">Lawn care pricing</span>
+    <h2 class="section-title">Simple lawn care pricing</h2>
+    <p class="section-text">
+      Routine mowing prices based on lawn size and service frequency. Weekly service is discounted,
+      while biweekly service is priced a little higher due to extra growth and cleanup.
+    </p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-image">
+          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80" alt="Small lawn example">
+        </div>
+        <div class="pricing-content">
+          <h3>Small Lawn</h3>
+          <p class="pricing-desc">
+            Best for smaller residential lots, townhomes, and compact front/back yards.
+          </p>
+
+          <div class="price-row">
+            <span>Weekly</span>
+            <strong>$50</strong>
+          </div>
+
+          <div class="price-row">
+            <span>Biweekly</span>
+            <strong>$60</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-image">
+          <img src="https://images.unsplash.com/photo-1592415486689-125cbbfcbee2?auto=format&fit=crop&w=1200&q=80" alt="Medium lawn example">
+        </div>
+        <div class="pricing-content">
+          <h3>Medium Lawn</h3>
+          <p class="pricing-desc">
+            Best for average residential properties with a moderate mowing area.
+          </p>
+
+          <div class="price-row">
+            <span>Weekly</span>
+            <strong>$65</strong>
+          </div>
+
+          <div class="price-row">
+            <span>Biweekly</span>
+            <strong>$75</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-image">
+          <img src="https://images.unsplash.com/photo-1560749003-f4b1e17e2dff?auto=format&fit=crop&w=1200&q=80" alt="Large lawn example">
+        </div>
+        <div class="pricing-content">
+          <h3>Large Lawn</h3>
+          <p class="pricing-desc">
+            Best for larger residential lots with more open mowing space and longer cut time.
+          </p>
+
+          <div class="price-row">
+            <span>Weekly</span>
+            <strong>$85</strong>
+          </div>
+
+          <div class="price-row">
+            <span>Biweekly</span>
+            <strong>$100</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-note">
+      <p>
+        Pricing is based on standard lawn conditions. Overgrown grass, first cuts, steep hills,
+        excessive edging, pet waste, obstacles, and extra cleanup may increase price.
+      </p>
+      <a href="#contact" class="btn btn-primary">Get Scheduled</a>
+    </div>
+  </div>
+</section>
 
   <section id="trust">
     <div class="container">
